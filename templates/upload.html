@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<!-- animates the "Kalido" text on the landing page -->
+<title>Kalido</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(window).on('load', function() {
+        $('#header').addClass('animate');
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+    <div id="upload" class="container-fluid">
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <h1 id="header">Kalido</h1>
+            <input style="display: none;" type="file" name="file" id="real-file" accept="image/*" required/>
+            <span id="custom-text">No file chosen</span>
+            <button type="button" id="custom-button">Choose File</button>
+            <input id="upl" type="submit" value="Upload"/>
+        </form>   
+    </div>
+    <script>
+        // Handles the buttons displayed on the landing page
+        const realFileBtn = document.getElementById("real-file");
+        const customBtn = document.getElementById("custom-button");
+        const customTxt = document.getElementById("custom-text");
+        const uploadBtn = document.getElementById("upl")
+
+        customBtn.addEventListener("click", function() {
+            realFileBtn.click();
+        });
+
+        uploadBtn.addEventListener("click", function() {
+            if (!realFileBtn.value) {
+                alert("Please select an image first!");
+            } 
+        });
+
+        realFileBtn.addEventListener("change", function() {
+            if (realFileBtn.value) {
+                customTxt.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
+            } else {
+                customTxt.innerHTML = "No file chosen";
+            }
+        });
+    </script>
+{% endblock %}

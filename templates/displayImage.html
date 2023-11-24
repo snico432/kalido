@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Kalido</title>
+{% endblock %}
+
+{% block body %}
+    <div>
+        <a href="/static/output/{{name}}" download>
+            <img class="img-responsive" src="/static/output/{{name}}">
+        </a>
+    </div>
+{% endblock %}
